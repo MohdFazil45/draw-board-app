@@ -1,0 +1,14 @@
+{
+    "name": "@repo/middleware",
+    "version": "1.0.0",
+    "main": "src/index.ts",
+    "type": "module",
+    "dependencies": {
+        "express": "^5.2.1",
+        "jsonwebtoken": "^9.0.2"
+    },
+    "devDependencies": {
+        "@types/express": "^5.0.6",
+        "@types/jsonwebtoken": "^9.0.10"
+    }
+}

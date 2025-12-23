@@ -1,6 +1,6 @@
 import { WebSocketServer } from "ws";
 import jwt, { JwtPayload } from 'jsonwebtoken'
-import { SECRET_TOKEN } from "./config.js";
+import { SECRET_TOKEN } from "@repo/backendcommon/config";
 
 
 const wss = new WebSocketServer({port:8080})

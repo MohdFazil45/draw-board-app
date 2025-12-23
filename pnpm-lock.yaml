@@ -33,6 +33,12 @@ importers:
         specifier: ^4.1.13
         version: 4.1.13
     devDependencies:
+      '@repo/backendcommon':
+        specifier: workspace:*
+        version: link:../../packages/backendcommon
+      '@repo/common':
+        specifier: workspace:*
+        version: link:../../packages/common
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../../packages/typescript-config
@@ -98,11 +104,28 @@ importers:
         specifier: ^8.18.3
         version: 8.18.3
     devDependencies:
+      '@repo/backendcommon':
+        specifier: workspace:*
+        version: link:../../packages/backendcommon
       '@types/jsonwebtoken':
         specifier: ^9.0.10
         version: 9.0.10
 
-  packages/commonConfig: {}
+  packages/backendcommon:
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+
+  packages/common:
+    dependencies:
+      zod:
+        specifier: ^4.1.13
+        version: 4.1.13
+    devDependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
 
   packages/db:
     dependencies:

@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express"
-import z from "zod"
 import bcrypt from "bcrypt"
 import Jwt from "jsonwebtoken"
-import { SECRET_TOKEN } from "./config.js"
+import { SECRET_TOKEN } from "@repo/backendcommon/config"
+import { CreateRoomSchema, CreateUserSchema, SigninSchema } from "@repo/common/types"
 
 
 
@@ -18,12 +18,8 @@ const USERS: UserCredentials[] = []
 app.use(express.json())
 
 app.post("/api/v1/signup", async(req:Request,res:Response)=>{
-    const requiredBody = z.object({
-        username : z.string(),
-        password: z.string().min(6).max(14)
-    })
-
-    const safeParse = requiredBody.safeParse(req.body)
+    
+    const safeParse = CreateUserSchema.safeParse(req.body)
 
     if (!safeParse.success) {
         return res.json({
@@ -55,6 +51,16 @@ app.post("/api/v1/signup", async(req:Request,res:Response)=>{
 })
 
 app.post("/api/v1/sigin",async(req:Request, res:Response)=>{
+
+    const safeParse = SigninSchema.safeParse(req.body)
+
+    if (!safeParse.success) {
+        return res.json({
+            msg:"Incorrect format",
+            error: safeParse.error
+        })
+    }
+
     const {username, password} = req.body
 
     const response = USERS.find((user)=>user.username===username)
@@ -83,7 +89,14 @@ app.post("/api/v1/sigin",async(req:Request, res:Response)=>{
 })
 
 app.get("/api/v1/create-room", async(req:Request, res:Response)=>{
+    const safeParse = CreateRoomSchema.safeParse(req.body)
 
+    if (!safeParse.success) {
+        return res.json({
+            msg:"Incorrect format",
+            error: safeParse.error
+        })
+    }
 
 })
 
